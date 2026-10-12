@@ -6,7 +6,7 @@ export const WaxSeal = ({ onClick, isBroken, initials, ariaLabel }) => {
       onClick={onClick}
       disabled={isBroken}
       aria-label={ariaLabel || "Open wedding invitation"}
-      className={`relative z-30 group cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#C5A059]/40 rounded-full transition-all duration-700 ${
+      className={`relative z-30 group cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#C5A059]/40 rounded-full envelope-seal-trigger ${
         isBroken 
           ? "opacity-0 scale-50 pointer-events-none" 
           : "opacity-100 scale-100 hover:scale-105 active:scale-95"

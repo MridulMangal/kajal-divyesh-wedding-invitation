@@ -10,23 +10,23 @@ export const OpeningEnvelope = ({ onOpenComplete, onMusicStart, weddingData }) =
 
     onMusicStart?.();
 
-    // Step 1: Compress and fade the seal (300ms)
+    // Let each motion finish before the next state changes its transform.
     setOpeningStep(1);
 
-    // Step 2: Open top envelope flap in 3D (600ms)
+    // Step 2: Open the flap after the seal has faded.
     setTimeout(() => {
       setOpeningStep(2);
-    }, 350);
+    }, 550);
 
-    // Step 3: Card slides up from pocket (1100ms)
+    // Step 3: Eject the card once its small preview movement has settled.
     setTimeout(() => {
       setOpeningStep(3);
-    }, 900);
+    }, 1550);
 
-    // Step 4: Cinematic dissolve to full wedding invitation
+    // Finish the envelope exit before revealing the full invitation.
     setTimeout(() => {
       if (onOpenComplete) onOpenComplete();
-    }, 2000);
+    }, 2650);
   };
 
   return (
@@ -52,7 +52,7 @@ export const OpeningEnvelope = ({ onOpenComplete, onMusicStart, weddingData }) =
       {/* 3D Envelope Container */}
       <div className="envelope-perspective relative w-full max-w-[380px] aspect-[19/13] shrink-0">
         {/* Envelope Shell */}
-        <div className={`relative w-full h-full envelope-wrapper transition-all duration-1000 ${
+        <div className={`relative w-full h-full envelope-wrapper ${
           openingStep >= 3 ? "scale-95 translate-y-12 opacity-0" : "scale-100"
         }`}>
           
@@ -64,7 +64,7 @@ export const OpeningEnvelope = ({ onOpenComplete, onMusicStart, weddingData }) =
 
           {/* Invitation Card peeking & sliding out */}
           <div 
-            className={`absolute left-3 right-3 top-3 bottom-3 bg-[#FFFBF8] rounded-md shadow-md p-4 flex flex-col items-center justify-center text-center border border-[#C5A059]/40 transition-all duration-1000 ease-out z-10 ${
+            className={`absolute left-3 right-3 top-3 bottom-3 bg-[#FFFBF8] rounded-md shadow-md p-4 flex flex-col items-center justify-center text-center border border-[#C5A059]/40 envelope-card z-10 ${
               openingStep >= 3 
                 ? "-translate-y-36 scale-105 shadow-2xl z-20" 
                 : openingStep >= 2 
